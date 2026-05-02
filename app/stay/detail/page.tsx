@@ -318,8 +318,9 @@ function StayDetailContent() {
         {/* Bottom CTA */}
         <div className="fixed md:absolute bottom-0 w-full max-w-lg px-6 pt-4 pb-8 bg-surface/90 backdrop-blur-xl z-40 shadow-[0_-8px_32px_rgba(28,28,26,0.06)]">
           <div className="flex gap-3">
-            <Link href="/review/stay" className="flex-1 h-14 bg-gradient-to-br from-[#1D9E75] to-[#008560] text-on-primary rounded-full font-semibold text-[1rem] shadow-[0_8px_24px_rgba(29,158,117,0.25)] hover:opacity-90 active:scale-95 transition-all flex items-center justify-center">
-              Book This Stay
+            <Link href="/review/stay" className="flex-1 h-14 bg-gradient-to-br from-[#1D9E75] to-[#008560] text-on-primary rounded-full font-semibold text-[1rem] shadow-[0_8px_24px_rgba(29,158,117,0.25)] hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2">
+              <span className="material-symbols-outlined text-[20px]">done_all</span>
+              Complete Stay
             </Link>
           </div>
         </div>

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-export default function StayReview() {
+export default function TravelReview() {
   const router = useRouter();
   const [rating, setRating] = useState(0);
   const [feedback, setFeedback] = useState('');
@@ -25,7 +25,7 @@ export default function StayReview() {
           <span className="material-symbols-outlined text-primary text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
         </div>
         <h1 className="text-2xl font-bold text-on-surface mb-2">Thank you!</h1>
-        <p className="text-on-surface-variant text-center">Your review helps other travelers find safe places to stay.</p>
+        <p className="text-on-surface-variant text-center">Your feedback helps make SafeRoam better for everyone.</p>
         <p className="text-primary text-sm mt-8 animate-pulse">Redirecting home...</p>
       </div>
     );
@@ -40,18 +40,18 @@ export default function StayReview() {
             <button onClick={() => router.back()} className="text-on-surface-variant">
               <span className="material-symbols-outlined">close</span>
             </button>
-            <h1 className="font-semibold text-lg text-on-surface">Rate your Stay</h1>
+            <h1 className="font-semibold text-lg text-on-surface">Rate your Journey</h1>
             <div className="w-6"></div>
           </div>
         </header>
 
         <main className="flex-1 px-6 pt-8 pb-20 flex flex-col items-center">
           <div className="w-20 h-20 bg-primary-container/20 rounded-2xl flex items-center justify-center mb-6">
-            <span className="material-symbols-outlined text-primary text-[42px]" style={{ fontVariationSettings: "'FILL' 1" }}>bed</span>
+            <span className="material-symbols-outlined text-primary text-[42px]" style={{ fontVariationSettings: "'FILL' 1" }}>commute</span>
           </div>
           
-          <h2 className="text-2xl font-bold text-on-surface text-center mb-1">How was your stay?</h2>
-          <p className="text-on-surface-variant text-sm text-center mb-8">Share your experience at Sentinel Inn.</p>
+          <h2 className="text-2xl font-bold text-on-surface text-center mb-1">How was your ride?</h2>
+          <p className="text-on-surface-variant text-sm text-center mb-8">Tell us about your experience with SafeRoam Guardian.</p>
 
           <form onSubmit={handleSubmit} className="w-full flex flex-col gap-8">
             {/* Star Rating */}
@@ -82,13 +82,13 @@ export default function StayReview() {
               </p>
             </div>
 
-            {/* Stay Specifics */}
+            {/* Safety Specifics */}
             <div className="grid grid-cols-2 gap-3">
               {[
-                { id: 'safe', label: 'Very Secure', icon: 'health_and_safety' },
-                { id: 'clean', label: 'Sparkling Clean', icon: 'clean_hands' },
-                { id: 'staff', label: 'Friendly Staff', icon: 'support_agent' },
-                { id: 'location', label: 'Great Location', icon: 'location_on' },
+                { id: 'safe', label: 'Felt Safe', icon: 'shield_check' },
+                { id: 'driver', label: 'Great Driver', icon: 'person' },
+                { id: 'route', label: 'Optimal Route', icon: 'route' },
+                { id: 'vehicle', label: 'Clean Vehicle', icon: 'minor_crash' },
               ].map(opt => (
                 <button
                   key={opt.id}
@@ -107,7 +107,7 @@ export default function StayReview() {
               <textarea
                 value={feedback}
                 onChange={(e) => setFeedback(e.target.value)}
-                placeholder="How were the safety features?"
+                placeholder="Share your experience (optional)"
                 className="w-full h-32 p-4 bg-surface-container rounded-2xl border border-outline-variant/30 text-on-surface text-[15px] focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none"
               />
             </div>

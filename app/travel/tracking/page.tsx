@@ -120,9 +120,9 @@ export default function TrackingJourney() {
               </div>
 
               {/* End Trip Action */}
-              <Link href="/" className="mt-2 w-full bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-full py-4 px-6 text-[1rem] font-semibold font-headline shadow-[0_4px_12px_rgba(0,105,76,0.15)] hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
-                Continue
-                <span className="material-symbols-outlined">arrow_forward</span>
+              <Link href="/review/travel" className="mt-2 w-full bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-full py-4 px-6 text-[1rem] font-semibold font-headline shadow-[0_4px_12px_rgba(0,105,76,0.15)] hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+                End Journey
+                <span className="material-symbols-outlined">check_circle</span>
               </Link>
             </div>
           </div>
