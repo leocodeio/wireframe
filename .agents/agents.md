@@ -1,0 +1,3 @@
+- we are only designing the wireframes for now.
+- donot worry about logics
+- just implement things using stitch mcp and the button will navigate accordingly
