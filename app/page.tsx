@@ -1,19 +1,73 @@
+'use client';
+
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import BottomNavBar from './components/BottomNavBar';
 
 export default function Home() {
+  const router = useRouter();
+  const [ready, setReady] = useState(false);
+
+  const [showLogout, setShowLogout] = useState(false);
+
+  useEffect(() => {
+    const checkAuth = () => {
+      const isAuthed = localStorage.getItem('sr_authed');
+      if (!isAuthed) {
+        router.replace('/auth/login');
+      } else {
+        // Wrap in a microtask to avoid the synchronous setState warning
+        Promise.resolve().then(() => setReady(true));
+      }
+    };
+    checkAuth();
+  }, [router]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('sr_authed');
+    router.replace('/auth/login');
+  };
+
+  if (!ready) return null; // blank screen while checking — avoids flash
+
   return (
-    <div className="flex flex-col items-center w-full min-h-screen">
+    <div className="flex flex-col items-center w-full min-h-screen" onClick={() => showLogout && setShowLogout(false)}>
       <div className="w-full max-w-lg md:max-w-4xl relative flex flex-col min-h-screen shadow-2xl bg-surface">
         <header className="sticky top-0 w-full z-50 bg-[#FCF9F5]/85 backdrop-blur-md shadow-sm flex justify-between items-center px-6 py-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-semibold text-lg overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img 
-                alt="Avatar" 
-                className="w-full h-full object-cover" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhKPljF2V3EBh0FwvqFVzoPM5ls6dHVlwSPfjaHYCcQT3CvkFc9E3MTZVjR_i8YLclHR-etQ7HrYt93v4kj-a_20CYKTuneZGDJCKp703xNjb9Kb0bD361LHZbjUvcgU0PoJZLeZ-NjjsIwIR_vZ_z0Xb1LFYGfiy5EMgaap9tRvKJx2Cl_7Fnfq8JHcr70Z5qaWDjGgxCd-9Mkvm7gJsEpUbkG6lSA212aztFrQdykbbm_OQ6KjFOi69t6039jTRXkIhZoVhMvBw"
-              />
+            <div className="relative">
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowLogout(!showLogout);
+                }}
+                className="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-semibold text-lg overflow-hidden border-2 border-transparent hover:border-primary/30 transition-all active:scale-95"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img 
+                  alt="Avatar" 
+                  className="w-full h-full object-cover" 
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhKPljF2V3EBh0FwvqFVzoPM5ls6dHVlwSPfjaHYCcQT3CvkFc9E3MTZVjR_i8YLclHR-etQ7HrYt93v4kj-a_20CYKTuneZGDJCKp703xNjb9Kb0bD361LHZbjUvcgU0PoJZLeZ-NjjsIwIR_vZ_z0Xb1LFYGfiy5EMgaap9tRvKJx2Cl_7Fnfq8JHcr70Z5qaWDjGgxCd-9Mkvm7gJsEpUbkG6lSA212aztFrQdykbbm_OQ6KjFOi69t6039jTRXkIhZoVhMvBw"
+                />
+              </button>
+              
+              {/* Profile Dropdown */}
+              {showLogout && (
+                <div className="absolute top-full left-0 mt-2 w-48 bg-surface/90 backdrop-blur-xl border border-outline-variant/30 rounded-2xl shadow-xl py-2 z-50 animate-dropdown overflow-hidden">
+                  <div className="px-4 py-2 border-b border-outline-variant/10">
+                    <p className="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Account</p>
+                    <p className="text-sm font-semibold text-on-surface truncate">Alex Johnson</p>
+                  </div>
+                  <button 
+                    onClick={handleLogout}
+                    className="w-full px-4 py-3 flex items-center gap-3 text-error hover:bg-error/10 transition-colors text-left"
+                  >
+                    <span className="material-symbols-outlined text-[20px]">logout</span>
+                    <span className="text-[14px] font-bold">Log out</span>
+                  </button>
+                </div>
+              )}
             </div>
             <h1 className="font-inter text-title-md font-semibold text-on-surface">Hello, Traveler</h1>
           </div>
@@ -91,8 +145,20 @@ export default function Home() {
               </div>
             </Link>
 
+            {/* Communities (Full Width) */}
+            <Link className="col-span-2 bg-surface-container-lowest p-5 rounded-xl flex items-center gap-4 transition-transform active:scale-95 text-left group mt-2" href="/communities">
+              <div className="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center group-hover:bg-primary-fixed/20 transition-colors shrink-0">
+                <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>groups</span>
+              </div>
+              <div className="flex-1">
+                <h4 className="font-semibold text-title-md mb-1">Communities</h4>
+                <p className="text-sm text-on-surface-variant">Find your travel tribe</p>
+              </div>
+              <span className="material-symbols-outlined text-outline-variant">chevron_right</span>
+            </Link>
+
             {/* Local Support (Full Width) */}
-            <Link className="col-span-2 bg-surface-container-lowest p-5 rounded-xl flex items-center gap-4 transition-transform active:scale-95 text-left group mt-2" href="/local-support">
+            <Link className="col-span-2 bg-surface-container-lowest p-5 rounded-xl flex items-center gap-4 transition-transform active:scale-95 text-left group" href="/local-support">
               <div className="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center group-hover:bg-primary-fixed/20 transition-colors shrink-0">
                 <span className="material-symbols-outlined text-primary">group</span>
               </div>
@@ -106,7 +172,7 @@ export default function Home() {
 
           {/* Action Banner */}
           <section>
-            <Link className="w-full bg-surface-container-high py-4 px-6 rounded-full flex items-center justify-center gap-2 text-primary font-semibold transition-colors hover:bg-surface-container-highest active:scale-95" href="#">
+            <Link className="w-full bg-surface-container-high py-4 px-6 rounded-full flex items-center justify-center gap-2 text-primary font-semibold transition-colors hover:bg-surface-container-highest active:scale-95" href="/navigate">
               <span className="material-symbols-outlined text-lg">download</span>
               Show offline maps
             </Link>
