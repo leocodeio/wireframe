@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import BottomNavBar from './components/BottomNavBar';
 
 export default function Home() {
   return (
@@ -11,7 +12,7 @@ export default function Home() {
               <img 
                 alt="Avatar" 
                 className="w-full h-full object-cover" 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_faStYn_DXR9XedhdVYvEj9uoUhm2RNZAxml3jeTs4m5VQ9svrJXhJ7JrhImk5bxLhsM21blW85y4ps52VBdigCt9J83jN752qDsJmI-k_5Illu7eMLDBRyqfYDUnV2OSLPmjIsFXUh_M8WvB7PFBrZmR4EaRHhH7pJPJxz3G4crinRjCrWmWGspcTm_hb-udBUz0Rj0-eqWval_kUapRfjUpunUrYiAQJ1NQzMHImp-aurr-b5jGzPa7LcAJ8iDnRG3c7mnPPdE"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhKPljF2V3EBh0FwvqFVzoPM5ls6dHVlwSPfjaHYCcQT3CvkFc9E3MTZVjR_i8YLclHR-etQ7HrYt93v4kj-a_20CYKTuneZGDJCKp703xNjb9Kb0bD361LHZbjUvcgU0PoJZLeZ-NjjsIwIR_vZ_z0Xb1LFYGfiy5EMgaap9tRvKJx2Cl_7Fnfq8JHcr70Z5qaWDjGgxCd-9Mkvm7gJsEpUbkG6lSA212aztFrQdykbbm_OQ6KjFOi69t6039jTRXkIhZoVhMvBw"
               />
             </div>
             <h1 className="font-inter text-title-md font-semibold text-on-surface">Hello, Traveler</h1>
@@ -58,7 +59,7 @@ export default function Home() {
             </Link>
             
             {/* Stay */}
-            <Link className="bg-surface-container-lowest p-5 rounded-xl flex flex-col items-start gap-4 transition-transform active:scale-95 text-left group" href="#">
+            <Link className="bg-surface-container-lowest p-5 rounded-xl flex flex-col items-start gap-4 transition-transform active:scale-95 text-left group" href="/stay">
               <div className="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center group-hover:bg-primary-fixed/20 transition-colors">
                 <span className="material-symbols-outlined text-primary">bed</span>
               </div>
@@ -113,37 +114,7 @@ export default function Home() {
         </main>
 
         {/* BottomNavBar */}
-        <nav className="fixed md:sticky bottom-0 md:bottom-6 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-auto md:w-full md:mx-auto h-[72px] z-50 md:rounded-full rounded-t-3xl bg-[#FCF9F5]/85 backdrop-blur-md flex justify-around items-center px-4 md:px-8 pb-safe md:pb-0 w-full max-w-lg md:max-w-4xl">
-          {/* Home (Active) */}
-          <Link className="flex flex-col items-center justify-center bg-[#1D9E75]/10 text-[#1D9E75] rounded-full px-4 py-1 active:scale-90 transition-all duration-200" href="/">
-            <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>home</span>
-            <span className="font-inter text-[10px] font-medium tracking-wide mt-1">Home</span>
-          </Link>
-          
-          {/* Travel */}
-          <Link className="flex flex-col items-center justify-center text-slate-400 hover:bg-slate-100 transition-colors active:scale-90 transition-all duration-200 px-4 py-1 rounded-full" href="/travel">
-            <span className="material-symbols-outlined">explore</span>
-            <span className="font-inter text-[10px] font-medium tracking-wide mt-1">Travel</span>
-          </Link>
-          
-          {/* Stay */}
-          <Link className="flex flex-col items-center justify-center text-slate-400 hover:bg-slate-100 transition-colors active:scale-90 transition-all duration-200 px-4 py-1 rounded-full" href="#">
-            <span className="material-symbols-outlined">bed</span>
-            <span className="font-inter text-[10px] font-medium tracking-wide mt-1">Stay</span>
-          </Link>
-          
-          {/* Navigate */}
-          <Link className="flex flex-col items-center justify-center text-slate-400 hover:bg-slate-100 transition-colors active:scale-90 transition-all duration-200 px-4 py-1 rounded-full" href="/navigate">
-            <span className="material-symbols-outlined">near_me</span>
-            <span className="font-inter text-[10px] font-medium tracking-wide mt-1">Navigate</span>
-          </Link>
-          
-          {/* Toolkit */}
-          <Link className="flex flex-col items-center justify-center text-slate-400 hover:bg-slate-100 transition-colors active:scale-90 transition-all duration-200 px-4 py-1 rounded-full" href="/toolkit">
-            <span className="material-symbols-outlined">handyman</span>
-            <span className="font-inter text-[10px] font-medium tracking-wide mt-1">Toolkit</span>
-          </Link>
-        </nav>
+        <BottomNavBar />
       </div>
     </div>
   );

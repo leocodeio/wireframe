@@ -2,6 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import BottomNavBar from '../../components/BottomNavBar';
 
 export default function Page() {
   const router = useRouter();
@@ -187,30 +188,8 @@ export default function Page() {
             Save Changes
         </button>
 </div>
-{/*  BottomNavBar  */}
-<nav className="fixed bottom-0 left-0 right-0 h-[72px] z-50 rounded-t-3xl bg-[#FCF9F5]/85  backdrop-blur-md shadow-[0_-8px_24px_rgba(26,26,24,0.08)] flex justify-around items-center px-4 pb-safe  md:sticky md:bottom-6 md:left-auto md:w-full md:mx-auto md:rounded-full w-full max-w-lg md:max-w-4xl">
-<Link className="flex flex-col items-center justify-center text-slate-400  hover:bg-slate-100 :bg-slate-800 transition-colors active:scale-90 duration-200 p-2 rounded-lg" href="/">
-<span className="material-symbols-outlined mb-1">home</span>
-<span className="font-inter text-[10px] font-medium tracking-wide">Home</span>
-</Link>
-<Link className="flex flex-col items-center justify-center text-slate-400  hover:bg-slate-100 :bg-slate-800 transition-colors active:scale-90 duration-200 p-2 rounded-lg" href="/travel">
-<span className="material-symbols-outlined mb-1">explore</span>
-<span className="font-inter text-[10px] font-medium tracking-wide">Travel</span>
-</Link>
-<Link className="flex flex-col items-center justify-center text-slate-400  hover:bg-slate-100 :bg-slate-800 transition-colors active:scale-90 duration-200 p-2 rounded-lg" href="#">
-<span className="material-symbols-outlined mb-1">bed</span>
-<span className="font-inter text-[10px] font-medium tracking-wide">Stay</span>
-</Link>
-<Link className="flex flex-col items-center justify-center text-slate-400  hover:bg-slate-100 :bg-slate-800 transition-colors active:scale-90 duration-200 p-2 rounded-lg" href="/navigate">
-<span className="material-symbols-outlined mb-1">near_me</span>
-<span className="font-inter text-[10px] font-medium tracking-wide">Navigate</span>
-</Link>
-<Link className="flex flex-col items-center justify-center bg-[#1D9E75]/10  text-[#1D9E75]  rounded-full px-4 py-1 active:scale-90 transition-all duration-200" href="/toolkit">
-<span className="material-symbols-outlined mb-1" style={{ fontVariationSettings: "'FILL' 1" }}>handyman</span>
-<span className="font-inter text-[10px] font-medium tracking-wide">Toolkit</span>
-</Link>
-</nav>
 
+<BottomNavBar />
 
       </div>
     </div>

@@ -2,9 +2,19 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import BottomNavBar from '../components/BottomNavBar';
 
 export default function Page() {
-  const router = useRouter();
+  const [isCachedMode, setIsCachedMode] = React.useState(false);
+  const [showToast, setShowToast] = React.useState(false);
+
+  const handleCachedMapsToggle = () => {
+    setIsCachedMode(!isCachedMode);
+    if (!isCachedMode) {
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
+    }
+  };
 
   return (
     <div className="flex flex-col items-center w-full min-h-screen">
@@ -18,10 +28,12 @@ export default function Page() {
         <span className="material-symbols-outlined">arrow_back</span>
       </Link>
     </div>
-    <h1 className="text-center flex-1 font-semibold text-xl text-[#1D9E75] font-['Inter'] tracking-tight">Offline Maps</h1>
+    <h1 className="text-center flex-1 font-semibold text-xl text-[#1D9E75] font-['Inter'] tracking-tight">
+      {isCachedMode ? 'Offline Maps' : 'Live Maps'}
+    </h1>
     <div className="w-10 flex items-center justify-end">
       <div className="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high border-outline-variant/15 border flex items-center justify-center">
-        <img alt="User profile avatar" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAt3qCVOe87Tbu0MWNdNgAH25J6lV_4Qh2_xRZ7hFQInM-hD9z6EcXik8hXDCntS0JPN3j7NH438oMhipwFUsgK3EqAEE94f61Fmac_hYXQsF4HIRVCTwfpMALEIJ_YvH6-mOVGBytkqpnfdB-GXUsBk63COLvblYYCq0y_sZr5JB2StD-234lRvqw0odU9tdJRfxXfLfW_Jb1B6MjFpYgk3e4j_txmezI0LTK1iQs3w1lMSCSo4OoZ2WDdapbifqu1tNfl0pT6DU"/>
+        <img alt="User profile avatar" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhKPljF2V3EBh0FwvqFVzoPM5ls6dHVlwSPfjaHYCcQT3CvkFc9E3MTZVjR_i8YLclHR-etQ7HrYt93v4kj-a_20CYKTuneZGDJCKp703xNjb9Kb0bD361LHZbjUvcgU0PoJZLeZ-NjjsIwIR_vZ_z0Xb1LFYGfiy5EMgaap9tRvKJx2Cl_7Fnfq8JHcr70Z5qaWDjGgxCd-9Mkvm7gJsEpUbkG6lSA212aztFrQdykbbm_OQ6KjFOi69t6039jTRXkIhZoVhMvBw"/>
       </div>
     </div>
   </div>
@@ -29,16 +41,27 @@ export default function Page() {
 {/*  Main Content Canvas  */}
 <main className="flex-1 flex flex-col pb-24 overflow-y-auto">
   <div className="px-6 pt-6 mb-4">
-    <p className="text-on-surface-variant text-sm mt-1">Navigate even without an internet connection.</p>
+    <p className="text-on-surface-variant text-sm mt-1">
+      {isCachedMode ? 'Navigate even without an internet connection.' : 'Real-time navigation and traffic updates.'}
+    </p>
   </div>
 {/*  Offline Indicator  */}
+{isCachedMode && (
 <div className="px-6 py-3 bg-error-container/60 backdrop-blur-md flex items-center gap-2">
 <span className="material-symbols-outlined text-on-error-container text-sm" style={{ fontVariationSettings: '\'FILL\' 1' }}>wifi_off</span>
 <p className="text-on-error-container font-label text-sm font-medium tracking-wide">Offline mode — Routing from cached data</p>
 </div>
+)}
 {/*  Map Area  */}
 <div className="w-full h-[300px] relative bg-surface-variant/50 overflow-hidden">
-<img alt="Map View" className="w-full h-full object-cover opacity-60 grayscale" data-alt="Monochrome textured map showing street grids and topography, soft lighting, desaturated, functional UI style" data-location="Tokyo, Japan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_mNtg-w-pCs5mkhZHjvsnJP8Z0RINg_iVB5nTjQqZNmPXcXW14lE613T-PikfP8PiG81aNCZYaYnZABMqQP6Hyg68mKFJHQmSwcjwFbO8wfv9zXq4qUmRDBIb-6xu6SEGXGGpiRxj2-7VOzWVCsY0O0Ym0txtvkMVzj-7ha_G69PkQg6eTiJATe_VM3PZ6DXr5sq-L1LYFypEJqrurZyKaBgqDlQ6agD_orybJkGJDa_9tZQ_WrR7g4xoOsuERA8771sjNWeomjs"/>
+<img 
+  alt="Map View" 
+  className={`w-full h-full object-cover transition-all duration-500 ${isCachedMode ? 'opacity-60 grayscale' : 'opacity-100'}`} 
+  src={isCachedMode 
+    ? "https://lh3.googleusercontent.com/aida-public/AB6AXuA_mNtg-w-pCs5mkhZHjvsnJP8Z0RINg_iVB5nTjQqZNmPXcXW14lE613T-PikfP8PiG81aNCZYaYnZABMqQP6Hyg68mKFJHQmSwcjwFbO8wfv9zXq4qUmRDBIb-6xu6SEGXGGpiRxj2-7VOzWVCsY0O0Ym0txtvkMVzj-7ha_G69PkQg6eTiJATe_VM3PZ6DXr5sq-L1LYFypEJqrurZyKaBgqDlQ6agD_orybJkGJDa_9tZQ_WrR7g4xoOsuERA8771sjNWeomjs"
+    : "/live_map.png" 
+  }
+/>
 {/*  Current Location Pin  */}
 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
 <div className="w-12 h-12 bg-primary-container/20 rounded-full flex items-center justify-center animate-pulse">
@@ -65,6 +88,7 @@ export default function Page() {
 <h3 className="font-body font-semibold text-on-surface truncate">Shibuya Crossing</h3>
 <p className="font-label text-sm text-on-surface-variant truncate">2-2-1 Dogenzaka, Shibuya City</p>
 </div>
+<div className="flex-1"></div>
 <div className="flex flex-col items-end gap-1 shrink-0">
 <span className="font-label text-xs font-medium text-on-surface-variant">2.4 km</span>
 <button className="text-primary font-label text-sm font-semibold flex items-center gap-1 group">
@@ -82,6 +106,7 @@ export default function Page() {
 <h3 className="font-body font-semibold text-on-surface truncate">Meiji Jingu</h3>
 <p className="font-label text-sm text-on-surface-variant truncate">1-1 Yoyogikamizonocho, Shibuya City</p>
 </div>
+<div className="flex-1"></div>
 <div className="flex flex-col items-end gap-1 shrink-0">
 <span className="font-label text-xs font-medium text-on-surface-variant">5.1 km</span>
 <button className="text-primary font-label text-sm font-semibold flex items-center gap-1 group">
@@ -97,13 +122,16 @@ export default function Page() {
 <h2 className="font-headline text-lg font-semibold tracking-tight text-on-surface">Offline Toolkit</h2>
 <div className="grid grid-cols-2 gap-4">
 {/*  Tool 1  */}
-<button className="bg-transparent border border-outline-variant/20 rounded-DEFAULT p-4 flex flex-col items-start gap-3 active:scale-95 transition-transform hover:bg-surface-container-low">
-<div className="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-primary shrink-0">
+<button 
+  className={`rounded-DEFAULT p-4 flex flex-col items-start gap-3 active:scale-95 transition-all hover:bg-surface-container-low border ${isCachedMode ? 'bg-primary/10 border-primary' : 'bg-transparent border-outline-variant/20'}`}
+  onClick={handleCachedMapsToggle}
+>
+<div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${isCachedMode ? 'bg-primary text-on-primary' : 'bg-surface-container-highest text-primary'}`}>
 <span className="material-symbols-outlined" style={{ fontVariationSettings: '\'FILL\' 1' }}>map</span>
 </div>
 <div className="text-left">
 <h3 className="font-body font-semibold text-on-surface text-sm">Cached Maps</h3>
-<p className="font-label text-xs text-on-surface-variant mt-0.5">Manage downloads</p>
+<p className="font-label text-xs text-on-surface-variant mt-0.5">{isCachedMode ? 'Offline active' : 'Manage downloads'}</p>
 </div>
 </button>
 {/*  Tool 2  */}
@@ -120,9 +148,13 @@ export default function Page() {
 </section>
 </div>
 </main>
-{/*  BottomNavBar (Suppressed due to sub-page/focused journey intent, as per 'The Destination Rule' and 'Automatic Suppression' for task-focused sub-pages with back action)  */}
-
+      <BottomNavBar />
+      {/*  Toast Notification  */}
+      <div className={`fixed top-20 left-1/2 transform -translate-x-1/2 bg-surface-container-highest text-on-surface px-6 py-3 rounded-full shadow-lg transition-all duration-300 pointer-events-none z-[100] flex items-center gap-2 ${showToast ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'}`}>
+        <span className="material-symbols-outlined text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>offline_pin</span>
+        <span className="font-medium font-body text-sm">Cached maps</span>
       </div>
+</div>
     </div>
   );
 }

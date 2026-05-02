@@ -5,34 +5,13 @@ import { useRouter } from 'next/navigation';
 
 export default function Page() {
   const router = useRouter();
-  const [progress, setProgress] = React.useState(0);
   const [showToast, setShowToast] = React.useState(false);
-  const startTime = React.useRef(null);
-  const animationFrame = React.useRef(null);
 
-  const startHold = () => {
-    startTime.current = Date.now();
-    const updateProgress = () => {
-      const elapsed = Date.now() - startTime.current;
-      const newProgress = Math.min((elapsed / 1500) * 100, 100);
-      setProgress(newProgress);
-      if (newProgress >= 100) {
-        setShowToast(true);
-        setTimeout(() => {
-            router.push('/toolkit');
-        }, 2000);
-      } else {
-        animationFrame.current = requestAnimationFrame(updateProgress);
-      }
-    };
-    animationFrame.current = requestAnimationFrame(updateProgress);
-  };
-
-  const cancelHold = () => {
-    if (animationFrame.current) {
-        cancelAnimationFrame(animationFrame.current);
-    }
-    setProgress(0);
+  const handleConfirm = () => {
+    setShowToast(true);
+    setTimeout(() => {
+        router.push('/toolkit');
+    }, 2000);
   };
 
   return (
@@ -78,21 +57,16 @@ export default function Page() {
 </div>
 {/*  Actions  */}
 <div className="w-full flex flex-col gap-4">
-{/*  Hold to Confirm SOS  */}
+{/*  Tap to Confirm SOS  */}
 <button 
-    className="w-full h-14 rounded-full bg-[#E24B4A] text-on-error font-label text-[1rem] font-semibold tracking-wide relative overflow-hidden flex items-center justify-center group active:scale-[0.98] transition-transform select-none touch-none" 
-    onMouseDown={startHold}
-    onMouseUp={cancelHold}
-    onMouseLeave={cancelHold}
-    onTouchStart={startHold}
-    onTouchEnd={cancelHold}
+    className="w-full h-14 rounded-full bg-[#E24B4A] text-on-error font-label text-[1rem] font-semibold tracking-wide relative overflow-hidden flex items-center justify-center group active:scale-[0.98] transition-all select-none hover:opacity-90" 
+    onClick={handleConfirm}
 >
-<div className="absolute left-0 top-0 bottom-0 bg-white/20" style={{ width: `${progress}%`, transition: 'width 0.1s linear' }}></div>
-<span className="relative z-10">Hold to Confirm SOS</span>
+<span className="relative z-10">Tap to Confirm SOS</span>
 </button>
 {/*  Cancel  */}
 <Link className="w-full h-14 rounded-full bg-transparent border border-outline-variant/20 text-on-surface-variant font-label text-[1rem] font-medium tracking-wide active:bg-surface-container-low transition-colors flex items-center justify-center" href="/toolkit">
-                    Cancel — I&apos;m safe
+                    Cancel - I&apos;m safe
                 </Link>
 </div>
 </div>

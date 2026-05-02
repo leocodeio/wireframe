@@ -16,9 +16,7 @@ export default function Page() {
 <span className="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
 </button>
 <h1 className="text-[#1D9E75]  font-['Inter'] font-semibold tracking-tight text-xl font-bold">Pulse Translate</h1>
-<button aria-label="Settings" className="text-on-surface hover:opacity-80 transition-opacity active:scale-95 duration-200">
-<span className="material-symbols-outlined" data-icon="settings">settings</span>
-</button>
+<div className="w-10"></div>
 </header>
 {/*  Main Canvas  */}
 <main className="flex-1 overflow-y-auto px-5 py-6 space-y-6 flex flex-col w-full relative z-10">

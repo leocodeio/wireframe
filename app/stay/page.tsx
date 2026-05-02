@@ -4,16 +4,16 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import BottomNavBar from '../components/BottomNavBar';
 
-const VEHICLES = [
-  { id: 'car', name: 'Car', icon: 'directions_car', price: 420 },
-  { id: 'bike', name: 'Bike', icon: 'directions_bike', price: 120 },
-  { id: 'auto', name: 'Auto', icon: 'electric_rickshaw', price: 250 },
-  { id: 'luxury', name: 'Luxury', icon: 'directions_car', price: 750 },
+const STAY_TYPES = [
+  { id: 'budget', name: 'Budget', icon: 'bed', price: 850 },
+  { id: 'comfort', name: 'Comfort', icon: 'hotel', price: 1800 },
+  { id: 'boutique', name: 'Boutique', icon: 'villa', price: 3200 },
+  { id: 'luxury', name: 'Luxury', icon: 'apartment', price: 6500 },
 ];
 
-export default function TravelPrice() {
+export default function StayPrice() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedVehicle, setSelectedVehicle] = useState(VEHICLES[0]);
+  const [selectedType, setSelectedType] = useState(STAY_TYPES[0]);
 
   return (
     <div className="flex flex-col items-center w-full min-h-screen">
@@ -26,7 +26,7 @@ export default function TravelPrice() {
                 <span className="material-symbols-outlined">arrow_back</span>
               </Link>
             </div>
-            <h1 className="text-center flex-1 font-semibold text-xl text-[#1D9E75] font-['Inter'] tracking-tight">Travel Price</h1>
+            <h1 className="text-center flex-1 font-semibold text-xl text-[#1D9E75] font-['Inter'] tracking-tight">Stay Price</h1>
             <div className="w-10 flex items-center justify-end">
               <div className="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high border-outline-variant/15 border flex items-center justify-center">
                 <img alt="User profile avatar" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAt3qCVOe87Tbu0MWNdNgAH25J6lV_4Qh2_xRZ7hFQInM-hD9z6EcXik8hXDCntS0JPN3j7NH438oMhipwFUsgK3EqAEE94f61Fmac_hYXQsF4HIRVCTwfpMALEIJ_YvH6-mOVGBytkqpnfdB-GXUsBk63COLvblYYCq0y_sZr5JB2StD-234lRvqw0odU9tdJRfxXfLfW_Jb1B6MjFpYgk3e4j_txmezI0LTK1iQs3w1lMSCSo4OoZ2WDdapbifqu1tNfl0pT6DU"/>
@@ -37,8 +37,9 @@ export default function TravelPrice() {
 
         <main className="px-6 pt-6 pb-24 w-full flex flex-col gap-4 flex-grow">
           <div className="mb-6">
-            <p className="text-on-surface-variant text-sm mt-1">Compare and track your rides safely.</p>
+            <p className="text-on-surface-variant text-sm mt-1">Find and compare safe places to stay.</p>
           </div>
+
           {/* Current Address Card */}
           <section>
             <div className="bg-surface-container-lowest rounded-DEFAULT p-5 shadow-[0_4px_16px_rgba(26,26,24,0.04)] relative overflow-hidden group">
@@ -58,64 +59,73 @@ export default function TravelPrice() {
             </div>
           </section>
 
-          {/* Functional Map Component */}
+          {/* Map — showing nearby stay pins */}
           <div className="rounded-DEFAULT overflow-hidden min-h-[320px] bg-[#e8eae6] relative border border-outline-variant/20 shadow-inner group cursor-pointer flex-grow">
-            {/* Faux Map Background / Roads */}
+            {/* Faux Map Background */}
             <svg className="absolute inset-0 w-full h-full text-white" preserveAspectRatio="none" viewBox="0 0 100 100">
-              {/* Minor roads */}
               <path className="opacity-50" d="M 10 0 L 25 100 M 60 0 L 45 100 M 90 0 L 80 100 M 0 30 L 100 40 M 0 80 L 100 70" fill="none" stroke="currentColor" strokeWidth="0.5" vectorEffect="non-scaling-stroke"></path>
-              {/* Major roads */}
               <path d="M -10 60 Q 50 40 110 50" fill="none" stroke="currentColor" strokeWidth="3" vectorEffect="non-scaling-stroke"></path>
               <path d="M 35 -10 Q 40 50 20 110" fill="none" stroke="currentColor" strokeWidth="3" vectorEffect="non-scaling-stroke"></path>
               <path d="M -10 85 Q 50 90 110 65" fill="none" stroke="#f2e8d5" strokeWidth="4" vectorEffect="non-scaling-stroke"></path>
-              {/* The Route Line */}
-              <path className="drop-shadow-sm" d="M 20 70 C 40 70 50 25 75 25" fill="none" stroke="#008560" strokeDasharray="6 6" strokeLinecap="round" strokeWidth="3" vectorEffect="non-scaling-stroke"></path>
             </svg>
 
-            {/* Pulsing Blue Dot (Origin) */}
-            <div className="absolute left-[20%] top-[70%] -translate-x-1/2 -translate-y-1/2 z-10">
+            {/* Pulsing Blue Dot (User Location) */}
+            <div className="absolute left-[45%] top-[55%] -translate-x-1/2 -translate-y-1/2 z-10">
               <div className="w-4 h-4 bg-[#4285F4] rounded-full border-[2.5px] border-white shadow-md relative">
                 <div className="absolute inset-0 bg-[#4285F4] rounded-full animate-ping opacity-60 scale-150"></div>
               </div>
             </div>
 
-            {/* Brand Teal Pin (Destination) */}
-            <div className="absolute left-[75%] top-[25%] -translate-x-1/2 -translate-y-full z-10 flex flex-col items-center">
-              <span className="material-symbols-outlined text-primary text-[36px] drop-shadow-md" style={{ fontVariationSettings: "'FILL' 1" }}>location_on</span>
-              <div className="w-2 h-1 bg-black/20 rounded-[100%] blur-[1px] mt-[-6px]"></div>
+            {/* Stay Pins */}
+            <div className="absolute left-[25%] top-[35%] -translate-x-1/2 -translate-y-full z-10 flex flex-col items-center">
+              <div className="bg-primary text-on-primary rounded-lg px-2 py-1 text-[10px] font-bold shadow-md mb-0.5">₹850/n</div>
+              <span className="material-symbols-outlined text-primary text-[28px] drop-shadow-md" style={{ fontVariationSettings: "'FILL' 1" }}>bed</span>
+            </div>
+            <div className="absolute left-[65%] top-[28%] -translate-x-1/2 -translate-y-full z-10 flex flex-col items-center">
+              <div className="bg-secondary text-on-secondary rounded-lg px-2 py-1 text-[10px] font-bold shadow-md mb-0.5">₹1800/n</div>
+              <span className="material-symbols-outlined text-secondary text-[28px] drop-shadow-md" style={{ fontVariationSettings: "'FILL' 1" }}>hotel</span>
+            </div>
+            <div className="absolute left-[70%] top-[60%] -translate-x-1/2 -translate-y-full z-10 flex flex-col items-center">
+              <div className="bg-tertiary text-on-tertiary rounded-lg px-2 py-1 text-[10px] font-bold shadow-md mb-0.5">₹3200/n</div>
+              <span className="material-symbols-outlined text-tertiary text-[28px] drop-shadow-md" style={{ fontVariationSettings: "'FILL' 1" }}>villa</span>
+            </div>
+            <div className="absolute left-[30%] top-[72%] -translate-x-1/2 -translate-y-full z-10 flex flex-col items-center">
+              <div className="bg-[#6750A4] text-white rounded-lg px-2 py-1 text-[10px] font-bold shadow-md mb-0.5">₹6500/n</div>
+              <span className="material-symbols-outlined text-[28px] drop-shadow-md" style={{ fontVariationSettings: "'FILL' 1", color: '#6750A4' }}>apartment</span>
             </div>
           </div>
 
+          {/* Type Selector + Price */}
           <section className="bg-surface-container-lowest rounded-DEFAULT p-4 shadow-[0_4px_16px_rgba(26,26,24,0.04)] flex items-center justify-between relative">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <button 
+                <button
                   onClick={() => setIsOpen(!isOpen)}
                   className="flex items-center gap-2 bg-surface-container-low px-3 py-2 rounded-lg border border-outline-variant/20 hover:bg-surface-container transition-colors"
                 >
                   <div className="w-8 h-8 flex items-center justify-center shrink-0">
-                    <span className="material-symbols-outlined text-primary text-[20px] overflow-hidden">{selectedVehicle.icon}</span>
+                    <span className="material-symbols-outlined text-primary text-[20px]">{selectedType.icon}</span>
                   </div>
-                  <span className="text-on-surface font-medium text-[0.875rem]">{selectedVehicle.name}</span>
+                  <span className="text-on-surface font-medium text-[0.875rem]">{selectedType.name}</span>
                   <span className={`material-symbols-outlined text-on-surface-variant text-[18px] transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>expand_more</span>
                 </button>
 
                 {isOpen && (
                   <div className="absolute bottom-full left-0 mb-2 w-52 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/20 overflow-hidden z-50 animate-dropdown">
-                    {VEHICLES.map((vehicle) => (
+                    {STAY_TYPES.map((type) => (
                       <button
-                        key={vehicle.id}
+                        key={type.id}
                         onClick={() => {
-                          setSelectedVehicle(vehicle);
+                          setSelectedType(type);
                           setIsOpen(false);
                         }}
-                        className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-primary/5 transition-colors ${selectedVehicle.id === vehicle.id ? 'bg-primary/10 text-primary' : 'text-on-surface'}`}
+                        className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-primary/5 transition-colors ${selectedType.id === type.id ? 'bg-primary/10 text-primary' : 'text-on-surface'}`}
                       >
                         <div className="w-8 h-8 flex items-center justify-center shrink-0">
-                          <span className="material-symbols-outlined text-[20px] overflow-hidden">{vehicle.icon}</span>
+                          <span className="material-symbols-outlined text-[20px]">{type.icon}</span>
                         </div>
-                        <span className="font-medium text-sm whitespace-nowrap">{vehicle.name}</span>
-                        {selectedVehicle.id === vehicle.id && (
+                        <span className="font-medium text-sm whitespace-nowrap">{type.name}</span>
+                        {selectedType.id === type.id && (
                           <span className="material-symbols-outlined ml-auto text-[18px]">check</span>
                         )}
                       </button>
@@ -125,25 +135,25 @@ export default function TravelPrice() {
               </div>
             </div>
             <div className="text-right">
-              <p className="text-on-surface-variant text-[0.75rem] font-medium uppercase tracking-wider">Estimate</p>
-              <p className="text-primary font-bold text-[1.125rem]">₹{selectedVehicle.price}</p>
+              <p className="text-on-surface-variant text-[0.75rem] font-medium uppercase tracking-wider">Est. / night</p>
+              <p className="text-primary font-bold text-[1.125rem]">₹{selectedType.price}</p>
             </div>
           </section>
         </main>
 
-        {/* Bottom Actions flex footer */}
+        {/* Bottom Actions */}
         <div className="w-full p-6 mt-auto flex justify-center z-30 bg-background md:bg-transparent">
-          <Link href="/travel/compare" className="w-full max-w-md h-14 bg-gradient-to-br from-[#1D9E75] to-[#008560] text-on-primary rounded-full font-semibold text-[1rem] shadow-[0_8px_24px_rgba(29,158,117,0.25)] hover:opacity-90 active:scale-95 transition-all flex items-center justify-center">
+          <Link href="/stay/map" className="w-full max-w-md h-14 bg-gradient-to-br from-[#1D9E75] to-[#008560] text-on-primary rounded-full font-semibold text-[1rem] shadow-[0_8px_24px_rgba(29,158,117,0.25)] hover:opacity-90 active:scale-95 transition-all flex items-center justify-center">
             Continue
           </Link>
         </div>
         <BottomNavBar />
       </div>
 
-      {/* Overlay for closing dropdown when clicking outside */}
+      {/* Overlay for closing dropdown */}
       {isOpen && (
-        <div 
-          className="fixed inset-0 z-40" 
+        <div
+          className="fixed inset-0 z-40"
           onClick={() => setIsOpen(false)}
         />
       )}

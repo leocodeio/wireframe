@@ -1,25 +1,29 @@
+"use client";
+import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function TrackingJourney() {
+  const router = useRouter();
+
   return (
     <div className="flex flex-col items-center w-full min-h-screen bg-background">
       <div className="w-full max-w-lg md:max-w-4xl relative flex flex-col h-screen overflow-hidden shadow-2xl antialiased">
         
-        {/* TopAppBar Semantic Shell Navigation */}
-        <header className="flex-none w-full z-50 bg-[#FCF9F5]/85 backdrop-blur-xl shadow-none flex items-center justify-between px-6 h-16">
-          <div className="flex items-center gap-3">
-            <span className="material-symbols-outlined text-primary font-bold text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>security</span>
-            <span className="font-bold text-primary tracking-tighter text-xl font-headline">SafeRoam</span>
-          </div>
-          {/* Connectivity Badge */}
-          <div className="flex items-center bg-secondary-fixed/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-secondary/10">
-            <div className="w-1.5 h-1.5 rounded-full bg-primary mr-2"></div>
-            <span className="text-xs font-medium text-on-secondary-fixed-variant font-label tracking-widest uppercase">Online</span>
-          </div>
-          <div className="flex items-center gap-4">
-            <Link href="/" className="w-8 h-8 rounded-full border border-outline-variant/30 overflow-hidden flex items-center justify-center text-primary bg-surface-container-high hover:bg-surface-container transition-colors">
-               <span className="material-symbols-outlined text-sm">close</span>
-            </Link>
+        {/* TopAppBar Standard Navigation */}
+        <header className="sticky top-0 z-50 w-full bg-[#FCF9F5]/85 backdrop-blur-md shadow-[0_8px_24px_rgba(26,26,24,0.08)]">
+          <div className="flex items-center justify-between px-6 h-16 w-full max-w-lg md:max-w-4xl mx-auto">
+            <div className="w-10 flex items-center">
+              <button onClick={() => router.back()} className="text-[#1A1A18]/60 hover:opacity-80 transition-opacity active:scale-95 duration-200 flex items-center">
+                <span className="material-symbols-outlined">arrow_back</span>
+              </button>
+            </div>
+            <h1 className="text-center flex-1 font-semibold text-xl text-[#1D9E75] font-['Inter'] tracking-tight">Journey Tracking</h1>
+            <div className="w-10 flex items-center justify-end">
+              <div className="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high flex items-center justify-center border-outline-variant/15 border">
+                <img alt="User Profile" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhKPljF2V3EBh0FwvqFVzoPM5ls6dHVlwSPfjaHYCcQT3CvkFc9E3MTZVjR_i8YLclHR-etQ7HrYt93v4kj-a_20CYKTuneZGDJCKp703xNjb9Kb0bD361LHZbjUvcgU0PoJZLeZ-NjjsIwIR_vZ_z0Xb1LFYGfiy5EMgaap9tRvKJx2Cl_7Fnfq8JHcr70Z5qaWDjGgxCd-9Mkvm7gJsEpUbkG6lSA212aztFrQdykbbm_OQ6KjFOi69t6039jTRXkIhZoVhMvBw"/>
+              </div>
+            </div>
           </div>
         </header>
 
@@ -54,13 +58,13 @@ export default function TrackingJourney() {
             </div>
             {/* Police Station Pin */}
             <div className="absolute top-[45%] left-[40%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-              <div className="bg-tertiary-container text-on-tertiary-container p-1.5 rounded-full shadow-md mb-1">
+              <div className="w-8 h-8 flex items-center justify-center bg-tertiary-container text-on-tertiary-container rounded-full shadow-md mb-1">
                 <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>local_police</span>
               </div>
             </div>
             {/* Safe Zone Pin */}
             <div className="absolute top-[35%] left-[75%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-              <div className="bg-secondary text-on-secondary p-1.5 rounded-full shadow-md mb-1 border-2 border-secondary-fixed">
+              <div className="w-8 h-8 flex items-center justify-center bg-secondary text-on-secondary rounded-full shadow-md mb-1 border-2 border-secondary-fixed">
                 <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>health_and_safety</span>
               </div>
             </div>
@@ -116,7 +120,7 @@ export default function TrackingJourney() {
               </div>
 
               {/* End Trip Action */}
-              <Link href="/review" className="mt-2 w-full bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-full py-4 px-6 text-[1rem] font-semibold font-headline shadow-[0_4px_12px_rgba(0,105,76,0.15)] hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+              <Link href="/" className="mt-2 w-full bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-full py-4 px-6 text-[1rem] font-semibold font-headline shadow-[0_4px_12px_rgba(0,105,76,0.15)] hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
                 Continue
                 <span className="material-symbols-outlined">arrow_forward</span>
               </Link>

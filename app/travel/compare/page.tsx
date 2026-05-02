@@ -3,16 +3,14 @@ import Link from 'next/link';
 export default function CompareProviders() {
   return (
     <div className="flex flex-col items-center w-full min-h-screen">
-      <div className="w-full max-w-lg md:max-w-4xl relative flex flex-col min-h-screen shadow-2xl bg-surface text-on-surface pb-24" style={{ minHeight: 'max(884px, 100dvh)' }}>
+      <div className="w-full max-w-lg md:max-w-4xl relative flex flex-col min-h-screen shadow-2xl bg-surface text-on-surface pb-8" style={{ minHeight: 'max(884px, 100dvh)' }}>
         {/* TopAppBar */}
         <header className="bg-[#FCF9F5] text-[#1D9E75] font-['Inter'] font-semibold tracking-tight sticky top-0 flex justify-between items-center w-full px-6 py-4 z-50">
           <Link href="/travel" className="hover:bg-[#F6F3EF] rounded-full transition-colors p-2 -ml-2">
             <span className="material-symbols-outlined">arrow_back</span>
           </Link>
           <h1 className="text-lg font-bold text-[#1D9E75]">Compare Transport</h1>
-          <button className="hover:bg-[#F6F3EF] rounded-full transition-colors p-2 -mr-2">
-            <span className="material-symbols-outlined">tune</span>
-          </button>
+          <div className="w-10"></div> {/* Placeholder to keep title centered */}
         </header>
 
         {/* Main Content */}
@@ -33,7 +31,7 @@ export default function CompareProviders() {
           {/* Provider Cards */}
           <div className="space-y-4">
             {/* Uber Card */}
-            <div className="bg-surface-container-lowest rounded-DEFAULT p-5 shadow-[0_4px_12px_rgba(26,26,24,0.03)] hover:shadow-[0_8px_24px_rgba(26,26,24,0.06)] transition-all cursor-pointer relative overflow-hidden group">
+            <Link href="/travel/tracking" className="bg-surface-container-lowest rounded-DEFAULT p-5 shadow-[0_4px_12px_rgba(26,26,24,0.03)] hover:shadow-[0_8px_24px_rgba(26,26,24,0.06)] transition-all cursor-pointer relative overflow-hidden group block">
               <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <div className="flex items-center justify-between relative z-10">
                 <div className="flex items-center gap-4">
@@ -51,15 +49,18 @@ export default function CompareProviders() {
                     </div>
                   </div>
                 </div>
-                <div className="text-right">
-                  <div className="font-headline text-[1.5rem] font-semibold text-on-surface">₹420</div>
-                  <p className="font-label text-[0.75rem] text-on-surface-variant mt-0.5">Est. Total</p>
+                <div className="flex items-center gap-3">
+                  <div className="text-right">
+                    <div className="font-headline text-[1.5rem] font-semibold text-on-surface">₹420</div>
+                    <p className="font-label text-[0.75rem] text-on-surface-variant mt-0.5">Est. Total</p>
+                  </div>
+                  <span className="material-symbols-outlined text-on-surface-variant">chevron_right</span>
                 </div>
               </div>
-            </div>
+            </Link>
 
             {/* Rapido Card */}
-            <div className="bg-surface-container-lowest rounded-DEFAULT p-5 shadow-[0_4px_12px_rgba(26,26,24,0.03)] hover:shadow-[0_8px_24px_rgba(26,26,24,0.06)] transition-all cursor-pointer relative overflow-hidden group border border-outline-variant/20">
+            <Link href="/travel/tracking" className="bg-surface-container-lowest rounded-DEFAULT p-5 shadow-[0_4px_12px_rgba(26,26,24,0.03)] hover:shadow-[0_8px_24px_rgba(26,26,24,0.06)] transition-all cursor-pointer relative overflow-hidden group border border-outline-variant/20 block">
               <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               {/* Highlight Badge for cheapest */}
               <div className="absolute top-0 right-0 bg-secondary-fixed text-on-secondary-fixed font-label text-[0.65rem] font-bold px-2 py-1 rounded-bl-lg uppercase tracking-wider">Lowest Price</div>
@@ -79,15 +80,18 @@ export default function CompareProviders() {
                     </div>
                   </div>
                 </div>
-                <div className="text-right">
-                  <div className="font-headline text-[1.5rem] font-semibold text-on-surface">₹380</div>
-                  <p className="font-label text-[0.75rem] text-on-surface-variant mt-0.5">Est. Total</p>
+                <div className="flex items-center gap-3">
+                  <div className="text-right">
+                    <div className="font-headline text-[1.5rem] font-semibold text-on-surface">₹380</div>
+                    <p className="font-label text-[0.75rem] text-on-surface-variant mt-0.5">Est. Total</p>
+                  </div>
+                  <span className="material-symbols-outlined text-on-surface-variant">chevron_right</span>
                 </div>
               </div>
-            </div>
+            </Link>
 
             {/* Ola Card */}
-            <div className="bg-surface-container-lowest rounded-DEFAULT p-5 shadow-[0_4px_12px_rgba(26,26,24,0.03)] hover:shadow-[0_8px_24px_rgba(26,26,24,0.06)] transition-all cursor-pointer relative overflow-hidden group">
+            <Link href="/travel/tracking" className="bg-surface-container-lowest rounded-DEFAULT p-5 shadow-[0_4px_12px_rgba(26,26,24,0.03)] hover:shadow-[0_8px_24px_rgba(26,26,24,0.06)] transition-all cursor-pointer relative overflow-hidden group block">
               <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <div className="flex items-center justify-between relative z-10">
                 <div className="flex items-center gap-4">
@@ -105,15 +109,18 @@ export default function CompareProviders() {
                     </div>
                   </div>
                 </div>
-                <div className="text-right">
-                  <div className="font-headline text-[1.5rem] font-semibold text-on-surface">₹410</div>
-                  <p className="font-label text-[0.75rem] text-on-surface-variant mt-0.5">Est. Total</p>
+                <div className="flex items-center gap-3">
+                  <div className="text-right">
+                    <div className="font-headline text-[1.5rem] font-semibold text-on-surface">₹410</div>
+                    <p className="font-label text-[0.75rem] text-on-surface-variant mt-0.5">Est. Total</p>
+                  </div>
+                  <span className="material-symbols-outlined text-on-surface-variant">chevron_right</span>
                 </div>
               </div>
-            </div>
+            </Link>
 
             {/* BluSmart Card (Premium option) */}
-            <div className="bg-surface-container-lowest rounded-DEFAULT p-5 shadow-[0_4px_12px_rgba(26,26,24,0.03)] hover:shadow-[0_8px_24px_rgba(26,26,24,0.06)] transition-all cursor-pointer relative overflow-hidden group">
+            <Link href="/travel/tracking" className="bg-surface-container-lowest rounded-DEFAULT p-5 shadow-[0_4px_12px_rgba(26,26,24,0.03)] hover:shadow-[0_8px_24px_rgba(26,26,24,0.06)] transition-all cursor-pointer relative overflow-hidden group block">
               <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <div className="absolute top-0 right-0 bg-surface-container-low text-on-surface-variant font-label text-[0.65rem] font-bold px-2 py-1 rounded-bl-lg uppercase tracking-wider">Premium EV</div>
               <div className="flex items-center justify-between relative z-10 mt-1">
@@ -132,22 +139,19 @@ export default function CompareProviders() {
                     </div>
                   </div>
                 </div>
-                <div className="text-right">
-                  <div className="font-headline text-[1.5rem] font-semibold text-on-surface">₹550</div>
-                  <p className="font-label text-[0.75rem] text-on-surface-variant mt-0.5">Est. Total</p>
+                <div className="flex items-center gap-3">
+                  <div className="text-right">
+                    <div className="font-headline text-[1.5rem] font-semibold text-on-surface">₹550</div>
+                    <p className="font-label text-[0.75rem] text-on-surface-variant mt-0.5">Est. Total</p>
+                  </div>
+                  <span className="material-symbols-outlined text-on-surface-variant">chevron_right</span>
                 </div>
               </div>
-            </div>
+            </Link>
           </div>
         </main>
 
-        {/* Sticky Footer CTA */}
-        <div className="fixed md:absolute bottom-0 w-full p-6 bg-surface/90 backdrop-blur-xl z-40 border-t border-outline-variant/10 shadow-[0_-8px_24px_rgba(26,26,24,0.04)]">
-          <Link href="/travel/tracking" className="w-full rounded-full py-4 px-6 bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline text-[1rem] font-semibold tracking-wide flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-[0_4px_12px_rgba(0,105,76,0.2)]">
-            <span>Book Uber</span>
-            <span className="material-symbols-outlined">arrow_forward</span>
-          </Link>
-        </div>
+
       </div>
     </div>
   );
