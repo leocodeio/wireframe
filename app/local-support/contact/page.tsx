@@ -84,11 +84,15 @@ export default function LocalPersonContact() {
         </main>
 
         {/* Fixed Bottom Action Area */}
-        <div className="sticky bottom-0 left-0 w-full bg-gradient-to-t from-surface via-surface/90 to-transparent pt-12 pb-8 px-6 z-40">
+        <div className="sticky bottom-0 left-0 w-full bg-gradient-to-t from-surface via-surface/90 to-transparent pt-8 pb-8 px-6 z-40 flex flex-col gap-3">
           <button className="w-full bg-primary text-white font-semibold text-[1.125rem] py-4 rounded-full shadow-lg flex items-center justify-center gap-2 active:scale-95 transition-transform duration-200">
             <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>chat_bubble</span>
             Message Elena
           </button>
+          <Link href="/review/support" className="w-full bg-surface-container-high text-on-surface font-semibold text-[1rem] py-3.5 rounded-full border border-outline-variant/30 flex items-center justify-center gap-2 active:scale-95 transition-transform duration-200">
+            <span className="material-symbols-outlined text-[20px]">done_all</span>
+            End Session & Review
+          </Link>
         </div>
       </div>
     </div>

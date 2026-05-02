@@ -135,6 +135,13 @@ export default function LoginPage() {
               </div>
             </div>
 
+            {/* Forgot password */}
+            <div className="text-right">
+              <button type="button" className="text-[13px] font-medium text-primary hover:underline transition-colors">
+                Forgot password?
+              </button>
+            </div>
+
             {/* Admin warning */}
             {role === 'admin' && (
               <div className="flex items-start gap-2.5 bg-[#F0F4FF] border border-[#1565C0]/20 rounded-xl px-4 py-3">
